@@ -1,3 +1,4 @@
+import axios from "axios";
 import { nanoid } from "nanoid";
 import { useReducer } from "react";
 
@@ -65,9 +66,9 @@ export function Reducer(state, action) {
 export const fetchEmployees = () => async (dispatch) => {
   dispatch({ type: "FETCH_EMPLOYEES" });
   try {
-    const response = await fetch("https://api.restful-api.dev/objects#");
-    const data = await response.json();
-    dispatch({ type: "FETCH_EMPLOYEES_SUCCESS", data });
+    const response = await axios.get("https://api.restful-api.dev/objects");
+
+    dispatch({ type: "FETCH_EMPLOYEES_SUCCESS", response });
   } catch (error) {
     dispatch({ type: "FETCH_EMPLOYEES_FAILURE", error });
   }
